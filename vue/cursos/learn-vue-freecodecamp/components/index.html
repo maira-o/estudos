@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>components</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    {{ kittifyName }}
+
+    <br>
+
+    <ul>
+        <li v-for="cat in cats">{{ cat.name }}</li>
+    </ul>
+
+    <input v-model="newCat" @keyup.enter="addKitty">
+
+    <button @click="addKitty">
+      +ADD
+    </button>
+
+    <cat-list :cats="cats" />
+  </div>
+
+  <script>
+    Vue.component('cat-list', {
+        props: ['cats'],
+        template: `
+            <ul>
+                <li v-for="cat in cats">{{ cat.name }}</li>
+            </ul>
+        `
+    })
+    
+    app = new Vue({
+      el: '#root',
+      component: [
+        'cat-list'
+      ],
+      data: {
+        cats: [
+            { name: 'kitkat' },
+            { name: 'fish' },
+            { name: 'henry' }
+        ],
+        newCat: ''
+      },
+      methods: {
+        addKitty: function() {
+          this.cats.push({name: this.newCat})
+          this.newCat = ''
+        }
+      },
+      computed: {
+        kittifyName: function() {
+            if (this.newCat.length > 1) {
+                return this.newCat + 'y'
+            }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
