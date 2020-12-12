@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    {{ greeting }}
+
+    <br>
+
+    <input v-model="greeting"> <!-- v-model -->
+
+    <!-- v-if ... will not render in dom -->
+    <div v-if="1 === 1"> <!-- v-if-->
+        Green
+    </div>
+
+    <div v-if="count === 1"> <!-- v-if v-else-if using variable count -->
+        Pink
+    </div>
+    <div v-else-if="count === 2">
+        Red
+    </div>
+    <div v-else>
+        Orange
+    </div>
+
+    <!--will render in the dom with style display:none-->
+    <div v-show> <!--v-show-->
+        Orange
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#root',
+      data: {
+        greeting: 'Hello Vue!',
+        count: 3
+      }
+    })
+  </script>
+</body>
+</html>
