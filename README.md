@@ -1,5 +1,5 @@
 <img width="150rem" src="./images/alien.svg">
-<h4>conteúdo baseado em cursos e tutoriais disponíveis na web</h4>
+<h4>conteúdo baseado em cursos e tutoriais disponíveis na web <strong>para fins de estudo</strong></h4>
 
 <h4>cursos</h4>
 
