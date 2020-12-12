@@ -3,6 +3,15 @@
 <head>
   <title>My first Vue app</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <style>
+      .red {
+          border: .2rem solid red;
+      }
+      .green {
+          border: .2rem solid green;
+      }
+  </style>
 </head>
 <body>
   <div id="root">
@@ -27,10 +36,43 @@
         Orange
     </div>
 
-    <!--will render in the dom with style display:none-->
+    <!--will render div with style display:none-->
     <div v-show> <!--v-show-->
         Orange
     </div>
+
+    <br>
+
+    {{ email }}
+
+    <p v-text="email"></p>
+
+    <p v-html="email"></p>
+
+    <!-- display only the first value assigned to the variable -->
+    <p v-once>{{ email }}</p>
+
+    <p>{{email}}</p>
+    
+    <!-- add class dynamic -->
+    <input v-model="email" :class="{red: email.length < 2}">
+
+    <!-- toggle classes -->
+    <input v-model="email" :class="[email.length < 2 ? 'red' : 'green']">
+
+    <br>
+
+    <!-- v-bind -->
+    <button onclick="alert('signed up')" v-bind:disabled="email.length < 2">
+        Submit
+    </button>
+
+    <!-- v-bind shorthand -->
+    <button onclick="alert('signed up')" :disabled="email.length < 2">
+        Submit
+    </button>
+
+
   </div>
 
   <script>
@@ -38,7 +80,8 @@
       el: '#root',
       data: {
         greeting: 'Hello Vue!',
-        count: 3
+        count: 3,
+        email: 'cats@cats.com'
       }
     })
   </script>
