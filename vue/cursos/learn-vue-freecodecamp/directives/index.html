@@ -72,7 +72,11 @@
         Submit
     </button>
 
+    <!-- loop in vue -->
 
+    <ul>
+        <li v-for="cat in cats">{{ cat.name }}</li>
+    </ul>
   </div>
 
   <script>
@@ -81,7 +85,12 @@
       data: {
         greeting: 'Hello Vue!',
         count: 3,
-        email: 'cats@cats.com'
+        email: 'cats@cats.com',
+        cats: [
+            { name: 'kitkat' },
+            { name: 'fish' },
+            { name: 'henry' }
+        ]
       }
     })
   </script>
