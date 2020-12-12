@@ -1,1 +1,1 @@
-<img width="20rem" src="./images/alien/svg">
+<img width="20rem" src="./images/alien.svg">
