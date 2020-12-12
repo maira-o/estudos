@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>methods</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <style>
+      .red {
+          border: .2rem solid red;
+      }
+      .green {
+          border: .2rem solid green;
+      }
+  </style>
+</head>
+<body>
+  <div id="root">
+    {{ greeting }}
+
+    <br>
+
+    <input v-model="greeting"> <!-- v-model -->
+
+    <!-- v-if ... will not render in dom -->
+    <div v-if="1 === 1"> <!-- v-if-->
+        Green
+    </div>
+
+    <div v-if="count === 1"> <!-- v-if v-else-if using variable count -->
+        Pink
+    </div>
+    <div v-else-if="count === 2">
+        Red
+    </div>
+    <div v-else>
+        Orange
+    </div>
+
+    <!--will render div with style display:none-->
+    <div v-show> <!--v-show-->
+        Orange
+    </div>
+
+    <br>
+
+    {{ email }}
+
+    <p v-text="email"></p>
+
+    <p v-html="email"></p>
+
+    <!-- display only the first value assigned to the variable -->
+    <p v-once>{{ email }}</p>
+
+    <p>{{email}}</p>
+    
+    <!-- add class dynamic -->
+    <input v-model="email" :class="{red: email.length < 2}">
+
+    <!-- toggle classes -->
+    <input v-model="email" :class="[email.length < 2 ? 'red' : 'green']">
+
+    <br>
+
+    <!-- v-bind -->
+    <button onclick="alert('signed up')" v-bind:disabled="email.length < 2">
+        Submit
+    </button>
+
+    <!-- v-bind shorthand -->
+    <button onclick="alert('signed up')" :disabled="email.length < 2">
+        Submit
+    </button>
+
+    <!-- loop in vue -->
+
+    <ul>
+        <li v-for="cat in cats">{{ cat.name }}</li>
+    </ul>
+
+    <!-- methods -->
+    <input v-model="newCat" v-on:keyup.enter="addKitty">
+
+    <button v-on:click="addKitty">
+      +ADD
+    </button>
+
+    <!-- could use @ in place of v-on: -->
+    <input v-model="newCat" @keyup.enter="addKitty">
+
+    <button @click="addKitty">
+      +ADD
+    </button>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#root',
+      data: {
+        greeting: 'Hello Vue!',
+        count: 3,
+        email: 'cats@cats.com',
+        cats: [
+            { name: 'kitkat' },
+            { name: 'fish' },
+            { name: 'henry' }
+        ],
+        newCat: ''
+      },
+      methods: {
+        addKitty: function() {
+          this.cats.push({name: this.newCat})
+          this.newCat = ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>
