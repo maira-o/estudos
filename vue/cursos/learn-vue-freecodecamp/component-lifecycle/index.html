@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>components lifecycle</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <ul>
+        <li v-for="cat in cats">{{ cat.name }}</li>
+    </ul>
+
+    <input v-model="newCat" @keyup.enter="addKitty">
+
+    <button @click="addKitty">
+      +ADD
+    </button>
+
+    <cat-list :cats="cats" />
+  </div>
+
+    <script>
+        Vue.component('cat-list', {
+            props: ['cats'],
+            template: `
+                <ul>
+                    <li v-for="cat in cats">{{ cat.name }}</li>
+                </ul>
+            `
+        })
+        
+        app = new Vue({
+            el: '#root',
+            component: [
+                'cat-list'
+            ],
+            data: {
+                cats: [
+                    { name: 'kitkat' },
+                    { name: 'fish' },
+                    { name: 'henry' }
+                ],
+                newCat: ''
+            },
+            methods: {
+                addKitty: function() {
+                    this.cats.push({name: this.newCat})
+                    this.newCat = ''
+                }
+            },
+            created: function() {
+                console.log('created')
+            },
+
+            mounted: function() {
+                console.log('mounted')
+            },
+
+            updated: function() {
+                console.log('updated')
+            },
+
+            destroyed: function() {
+                console.log('destroyed')
+            }
+        })
+
+        setTimeout(function() {
+            app.$destroy();
+        }, 5000)
+    </script>
+</body>
+</html>
